@@ -62,7 +62,7 @@ if __name__ == '__main__':
     )
     args = parser.parse_args()
 
-    logger.setLevel(getattr(logging, args.log_level))
+    logging.basicConfig(level=getattr(logging, args.log_level))
 
     if args.make_config:
         try:
@@ -79,7 +79,12 @@ if __name__ == '__main__':
         exit(1)
 
     for repo in get_repos(config):
-        repo.proceed()
+        try:
+            repo.proceed()
+        except Exception as e:
+            logger.error('Something has gome wrong during proceeding {}: {}'
+                         .format(repo.git_dir, e))
+            continue
         state = list()
         for s in ('unpulled', 'unpushed'):
             if getattr(repo, s):
