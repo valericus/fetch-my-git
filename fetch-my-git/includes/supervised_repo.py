@@ -12,7 +12,7 @@ class SupervisedRepo(Repo):
                  auto_merge: bool=False, hard_reset: bool=False):
         self.remote_name = remote_name
         self.remote_url = remote_url
-        self.branch = branch,
+        self.branch = branch
         self.auto_merge = auto_merge
         self.hard_reset = hard_reset
 
