@@ -35,9 +35,9 @@ def make_config(paths, base_dir: str=None):
                          .format(sub_path, section))
             result.add_section(section)
             try:
-                result[section]['origin'] = get_remote_url(repo, 'origin')
+                result[section]['remote_url'] = get_remote_url(repo, 'origin')
                 logger.debug('Origin {} found'
-                             .format(result[section]['origin']))
+                             .format(result[section]['remote_url']))
             except (ValueError, NoSectionError):
                 result.remove_section(section)
                 logger.warning('No origin found for {}, skipped'
